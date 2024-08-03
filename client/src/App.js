@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogHomePage from './BlogHomePage';
+import BlogHomePage from './pages/BlogHomePage';
 function App() {
   return (
     <div className="App">
