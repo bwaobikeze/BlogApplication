@@ -46,3 +46,4 @@ resource "google_firestore_database" "firestore" {
   name = "default"
   type = "FIRESTORE_NATIVE"
 }
+

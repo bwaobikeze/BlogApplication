@@ -8,13 +8,33 @@ import {
   CardFooter,
 } from "@nextui-org/react";
 // import { useRouter } from "next/router";
-import postList from "../models/PostListModel";
-
+import postsmodel from "../models/PostListModel";
+import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
 
 function BlogHomePage() {
-  // const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080")
+      .then((response) => {
+        response.data.map((post) => {
+          setPosts((prevPosts) => [
+            ...prevPosts,
+            new postsmodel(
+              post.PostDate,
+              post.PostImage,
+              post.title,
+              post.exerp
+            ),
+          ]);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
   return (
     <div className="flex flex-row">
@@ -42,7 +62,7 @@ function BlogHomePage() {
         </Card>
       </div>
       <div className="flex flex-col">
-        {postList.map((post) => (
+        {posts.map((post) => (
           <Card>
             <CardHeader>
               <Avatar
