@@ -10,10 +10,11 @@ app.get("/", async (req, res) => {
   try {
     const PostsCollection = collection(db, "Posts");
     const querySnapshot = await getDocs(PostsCollection);
+    console.log(querySnapshot.docs);
     const Posts = querySnapshot.docs.map((doc) => doc.data());
     res.json(Posts);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch users" });
+    res.status(500).json({ error: "Failed to fetch posts" });
   }
 });
 

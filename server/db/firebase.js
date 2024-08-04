@@ -21,6 +21,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app, process.env.REACT_APP_FIREBASE_STORAGE_BUCKET);
+const db = getFirestore(app);
 
 export default db;
