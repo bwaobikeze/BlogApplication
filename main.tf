@@ -10,40 +10,33 @@ terraform {
 
 // Configure the Google Cloud provider
 provider "google-beta" {
-  credentials           = file(var.credentials_file)
-  user_project_override = true
+  credentials = file(var.credentials_file)
 }
 
-// Create a Google Cloud project
-provider "google-beta" {
-  alias                 = "no_user_project_override"
-  user_project_override = false
-}
 
 variable "credentials_file" {
   type    = string
-  default = "C:/Users/bwaob/Desktop/GoogleAccountKey/blogwebapplication-431305-1d9f96012b41.json"
+  default = "C:/Users/bwaob/Desktop/GoogleAccountKey/blogapplication-431707-4077aa507afe.json"
+}
+resource "google_firebase_project" "project" {
+  provider = google-beta
+  project  = "blogapplication-431707"
 }
 
-// Create a Firebase project
-resource "google_firebase_project" "firebase" {
-  provider = google-beta
-  project  = "blogwebapplication-431305"
-}
 
 // Create a Firebase web app
 resource "google_firebase_web_app" "web_app" {
   provider     = google-beta
-  project      = "blogwebapplication-431305"
-  display_name = "WebBlogApp"
+  project      = "blogapplication-431707"
+  display_name = "blogapp"
 }
 
 // Create a Firestore database
 resource "google_firestore_database" "firestore" {
   provider    = google-beta
-  project     = "blogwebapplication-431305"
+  project     = "blogapplication-431707"
   location_id = "us-central1"
-  name        = "default"
+  name ="(default)"
   type        = "FIRESTORE_NATIVE"
 }
 
