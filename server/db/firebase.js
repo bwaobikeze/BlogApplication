@@ -1,26 +1,13 @@
-import { initializeApp } from "firebase/app"; // Correct method name
-import { getFirestore } from "firebase/firestore";
-import { config } from "dotenv";
+import admin from "firebase-admin";
+import { getFirestore } from "firebase-admin/firestore";
+import serviceAccount from "file:///C:/Users/bwaob/Desktop/GoogleAccountKey/blogapplication-431707-4077aa507afe.json"assert { type: "json" };;
 
-// Load environment variables
-config();
+// Initialize the Firebase Admin SDK with your service account key
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
-console.log(process.env.REACT_APP_FIREBASE_API_KEY);
-console.log(process.env.REACT_APP_FIREBASE_AUTH_DOMAIN);
-console.log(process.env.REACT_APP_FIREBASE_PROJECT_ID);
-console.log(process.env.REACT_APP_FIREBASE_STORAGE_BUCKET);
-console.log(process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID);
-console.log(process.env.REACT_APP_FIREBASE_APP_ID);
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-};
+const db = getFirestore(); // Get a Firestore instance with admin privileges
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 export default db;

@@ -1,16 +1,17 @@
 import express from "express";
 import cors from "cors";
 import db from "./db/firebase.js";
-import { collection, getDocs } from "firebase/firestore";
+
+
 
 const app = express();
 app.use(cors());
 
 app.get("/", async (req, res) => {
   try {
-    const PostsCollection = collection(db, "Posts");
-    const querySnapshot = await getDocs(PostsCollection);
-    console.log(querySnapshot.docs);
+    const PostsCollection = db.collection("BlogPost");
+    console.log(PostsCollection);
+    const querySnapshot = await PostsCollection.get(); 
     const Posts = querySnapshot.docs.map((doc) => doc.data());
     res.json(Posts);
   } catch (error) {
