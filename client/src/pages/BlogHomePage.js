@@ -8,7 +8,7 @@ import {
   CardFooter,
 } from "@nextui-org/react";
 // import { useRouter } from "next/router";
-import postsmodel from "../models/PostListModel";
+
 import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
@@ -19,28 +19,27 @@ function BlogHomePage() {
     axios
       .get("http://localhost:8080")
       .then((response) => {
-        response.data.map((post) => {
-          setPosts((prevPosts) => [
-            ...prevPosts,
-            new postsmodel(
-              post.PostDate,
-              post.PostImage,
-              post.title,
-              post.exerp
-            ),
-          ]);
+        const newPost = response.data.map((post) => {
+          return post;
         });
+        setPosts([...posts, ...newPost]);
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
+  const ReadMore = () => { 
+    
+  };
 
   return (
-    <div className="flex flex-row">
-      <div className="flex flex-col">
+    <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
+      {/* Sidebar */}
+      <div style={{ flex: "0 0 300px" }}>
         <Card>
-          <CardHeader>
+          <CardHeader
+            css={{ display: "flex", alignItems: "center", gap: "10px" }}
+          >
             <Avatar src="https://nextui.org/assets/avatar-1.jpg" alt="Avatar" />
             <div>
               <h5>John Doe</h5>
@@ -48,36 +47,45 @@ function BlogHomePage() {
             </div>
           </CardHeader>
           <CardBody>
-            <Image src="https://nextui.org/assets/blog-1.jpg" alt="Blog" />
-            <h3>Featured Post</h3>
+            <h3>Denali</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              pulvinar, erat at fermentum malesuada, erat nunc fermentum sapien,
-              ac vestibulum velit turpis et arcu. Nullam eget fermentum mauris.
-              Nullam vestibulum, lacus a ultricies fermentum, neque leo
-              fermentum nunc, ac vestibulum velit turpis et arcu.
+              Denali is a simple responsive blog template. Easily add new posts
+              using the Editor or change layout and design using the Designer.
             </p>
+            <h4>Featured Posts:</h4>
+            <ul>
+              <li>
+                According a funnily until pre-set or arrogant well cheerful
+              </li>
+              <li>Overlaid the jeepers uselessly much excluding</li>
+            </ul>
           </CardBody>
-          <CardFooter>Social Media buttons</CardFooter>
+          <CardFooter>{/* Social Media buttons can go here */}</CardFooter>
         </Card>
       </div>
-      <div className="flex flex-col">
+
+      {/* Blog Posts */}
+      <div style={{ flex: "2" }}>
         {posts.map((post) => (
-          <Card>
-            <CardHeader>
-              <Avatar
-                src="https://nextui.org/assets/avatar-1.jpg"
-                alt="Avatar"
-              />
-              <div>
-                <h5>John Doe</h5>
-                <p>{post.PostDate}</p>
-              </div>
-            </CardHeader>
+          <Card style={{ marginBottom: "20px" }}>
+            <CardHeader
+              css={{ display: "flex", alignItems: "center", gap: "10px" }}
+            ></CardHeader>
             <CardBody>
-              <Image src={post.PostImage} alt="Blog" />
-              <h3>{post.title}</h3>
-              <p>{post.exerp}</p>
+              <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
+                <div>
+                  <Image
+                    src={post.PostImage || "https://via.placeholder.com/400"}
+                    alt="Blog"
+                    width="100"
+                  />
+                </div>
+
+                <div>
+                  <h1>{post.title}</h1>
+                  <p>{post.Body.slice(0, 350)}...</p>
+                </div>
+              </div>
             </CardBody>
             <CardFooter>
               <Button>Read More</Button>
