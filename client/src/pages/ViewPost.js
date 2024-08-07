@@ -7,7 +7,7 @@ function ViewPost() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [Post, setPost] = useState({});
-
+    
     useEffect(() => {
         axios
             .get(`http://localhost:8080/post/${id}`)

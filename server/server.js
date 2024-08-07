@@ -8,7 +8,6 @@ app.use(cors());
 app.get("/", async (req, res) => {
   try {
     const PostsCollection = db.collection("BlogPost");
-    console.log(PostsCollection);
     const querySnapshot = await PostsCollection.get(); 
     const Posts = querySnapshot.docs.map((doc) => doc.data());
     res.json(Posts);
