@@ -7,14 +7,14 @@ import {
   Image,
   CardFooter,
 } from "@nextui-org/react";
-// import { useRouter } from "next/router";
-
 import axios from "axios";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function BlogHomePage() {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate(); // Use the navigate function to navigate to a different page
+
   useEffect(() => {
     axios
       .get("http://localhost:8080")
@@ -28,18 +28,17 @@ function BlogHomePage() {
         console.log(error);
       });
   }, []);
-  const ReadMore = () => { 
-    
+
+  const handleReadMore = (id) => {
+    navigate(`/post/${id}`); // Navigate to the post page with the post id
   };
 
   return (
-    <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
+    <div style={styles.container}>
       {/* Sidebar */}
-      <div style={{ flex: "0 0 300px" }}>
+      <div style={styles.sidebar}>
         <Card>
-          <CardHeader
-            css={{ display: "flex", alignItems: "center", gap: "10px" }}
-          >
+          <CardHeader style={styles.cardHeader}>
             <Avatar src="https://nextui.org/assets/avatar-1.jpg" alt="Avatar" />
             <div>
               <h5>John Doe</h5>
@@ -65,30 +64,27 @@ function BlogHomePage() {
       </div>
 
       {/* Blog Posts */}
-      <div style={{ flex: "2" }}>
+      <div style={styles.blogPosts}>
         {posts.map((post) => (
-          <Card style={{ marginBottom: "20px" }}>
-            <CardHeader
-              css={{ display: "flex", alignItems: "center", gap: "10px" }}
-            ></CardHeader>
+          <Card key={post.id} style={{ marginBottom: "20px" }}>
             <CardBody>
-              <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
-                <div>
+              <div style={styles.postContainer}>
+                <div style={styles.imageContainer}>
                   <Image
                     src={post.PostImage || "https://via.placeholder.com/400"}
                     alt="Blog"
-                    width="100"
+                    width="100%"
                   />
                 </div>
 
-                <div>
-                  <h1>{post.title}</h1>
+                <div style={styles.postContent}>
+                  <h1 style={styles.postTitle}>{post.title}</h1>
                   <p>{post.Body.slice(0, 350)}...</p>
                 </div>
               </div>
             </CardBody>
             <CardFooter>
-              <Button>Read More</Button>
+              <Button onClick={()=>handleReadMore(post.postID)}>Read More</Button>
             </CardFooter>
           </Card>
         ))}
@@ -96,5 +92,52 @@ function BlogHomePage() {
     </div>
   );
 }
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "20px",
+    padding: "20px",
+    flexWrap: "wrap",
+  },
+  sidebar: {
+    flex: "0 0 300px",
+    width: "100%",
+    marginBottom: "20px",
+  },
+  cardHeader: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+  },
+  blogPosts: {
+    flex: "2",
+    width: "100%",
+  },
+  postContainer: {
+    display: "flex",
+    gap: "20px",
+    padding: "20px",
+    flexDirection: "row", // Keep the image on the left and text on the right
+    alignItems: "center", // Vertically align the image and text
+  },
+  imageContainer: {
+    flex: "0 0 150px", // Control the size of the image container
+  },
+  postContent: {
+    flex: "1",
+  },
+  postTitle: {
+    fontSize: "24px", // Make the title large
+    fontWeight: "bold", // Make the title bold
+    marginBottom: "10px",
+  },
+  "@media (max-width: 768px)": {
+    postContainer: {
+      flexDirection: "column", // Stack the image and text vertically on smaller screens
+    },
+  },
+};
 
 export default BlogHomePage;
