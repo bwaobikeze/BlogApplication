@@ -1,7 +1,7 @@
-import React from 'react';
-import BlogHomePage from './pages/BlogHomePage';
-import ViewPost from './pages/ViewPost';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import BlogHomePage from "./pages/BlogHomePage";
+import ViewPost from "./pages/ViewPost";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (

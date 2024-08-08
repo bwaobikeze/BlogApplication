@@ -25,7 +25,7 @@ function ViewPost() {
 
     return (
         <div style={styles.pageContainer}>
-            <Card style={styles.postCard}>
+            <Card data-testid = "view-post" style={styles.postCard}>
                 <CardHeader style={styles.cardHeader}>
                     <h1 style={styles.title}>{Post.title}</h1>
                     <p style={styles.date}>June 25, 2020 | MUSIC</p>

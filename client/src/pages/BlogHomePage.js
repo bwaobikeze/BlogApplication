@@ -6,7 +6,6 @@ import {
   CardBody,
   Image,
   CardFooter,
-  avatar,
 } from "@nextui-org/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -40,19 +39,23 @@ function BlogHomePage() {
       <div style={styles.sidebar}>
         <Card>
           <CardHeader style={styles.ProfileCardHeader}>
-            <Avatar style={styles.avatar } src="https://nextui.org/assets/avatar-1.jpg" alt="Avatar" />
+            <Avatar
+              style={styles.avatar}
+              src="https://i.postimg.cc/Hxvkqz4J/image.webp"
+              alt="Avatar"
+            />
             <div>
               <h5>Brian Waobikeze</h5>
             </div>
           </CardHeader>
           <CardBody>
-            <h4>Featured Posts:</h4>
-            <ul>
-              <li>
-                According a funnily until pre-set or arrogant well cheerful
-              </li>
-              <li>Overlaid the jeepers uselessly much excluding</li>
-            </ul>
+            <h4>Welcome to My Blog!</h4>
+            <p>
+              I'm a software engineer with a passion for Video games Movies and
+              everything pop culture. I write about my experiences and share my
+              thoughts on various topics. Feel free to read my blog posts and
+              leave a comment.
+            </p>
           </CardBody>
           <CardFooter style={styles.CardFooter}>
             <a href="https://www.linkedin.com/in/brianwaobikeze">
