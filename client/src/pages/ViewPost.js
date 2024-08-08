@@ -7,7 +7,7 @@ function ViewPost() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [Post, setPost] = useState({});
-    
+
     useEffect(() => {
         axios
             .get(`http://localhost:8080/post/${id}`)
@@ -32,7 +32,7 @@ function ViewPost() {
                 </CardHeader>
                 <CardBody>
                     <Image 
-                        src={Post.PostImage || "https://via.placeholder.com/800x400"} 
+                        src={Post.postImage || "https://via.placeholder.com/800x400"} 
                         alt="Post Image"
                         style={styles.image}
                     />

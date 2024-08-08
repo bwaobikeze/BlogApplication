@@ -79,7 +79,7 @@ function BlogHomePage() {
               <div style={styles.postContainer}>
                 <div style={styles.imageContainer}>
                   <Image
-                    src={post.PostImage || "https://via.placeholder.com/400"}
+                    src={post.postImage || "https://via.placeholder.com/400"}
                     alt="Blog"
                     width="100%"
                   />
