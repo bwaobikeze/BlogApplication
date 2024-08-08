@@ -7,13 +7,21 @@ app.use(cors());
 
 app.get("/", async (req, res) => {
   try {
-    const PostsCollection = db.collection("BlogPost");
-    const querySnapshot = await PostsCollection.get(); 
-    const Posts = querySnapshot.docs.map((doc) => doc.data());
-    res.json(Posts);
+    const posts = [];
+    
+    const unsubscribe = db.collection("BlogPost").onSnapshot((snapshot) => {
+      snapshot.forEach((doc) => {
+        posts.push(doc.data());
+      });
+      unsubscribe(); // Stop listening after fetching the data
+      res.json(posts); // Send the response with the data
+    });
+    
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch posts" });
+    console.error("Error fetching posts:", error);
+    res.status(500).send("Internal Server Error");
   }
+
 });
 
 app.get("/post/:id", async (req, res) => { 

@@ -6,6 +6,7 @@ import {
   CardBody,
   Image,
   CardFooter,
+  avatar,
 } from "@nextui-org/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -38,19 +39,13 @@ function BlogHomePage() {
       {/* Sidebar */}
       <div style={styles.sidebar}>
         <Card>
-          <CardHeader style={styles.cardHeader}>
-            <Avatar src="https://nextui.org/assets/avatar-1.jpg" alt="Avatar" />
+          <CardHeader style={styles.ProfileCardHeader}>
+            <Avatar style={styles.avatar } src="https://nextui.org/assets/avatar-1.jpg" alt="Avatar" />
             <div>
-              <h5>John Doe</h5>
-              <p>Jan 1, 2023</p>
+              <h5>Brian Waobikeze</h5>
             </div>
           </CardHeader>
           <CardBody>
-            <h3>Denali</h3>
-            <p>
-              Denali is a simple responsive blog template. Easily add new posts
-              using the Editor or change layout and design using the Designer.
-            </p>
             <h4>Featured Posts:</h4>
             <ul>
               <li>
@@ -59,7 +54,20 @@ function BlogHomePage() {
               <li>Overlaid the jeepers uselessly much excluding</li>
             </ul>
           </CardBody>
-          <CardFooter>{/* Social Media buttons can go here */}</CardFooter>
+          <CardFooter style={styles.CardFooter}>
+            <a href="https://www.linkedin.com/in/brianwaobikeze">
+              <img
+                src="https://img.icons8.com/color/50/000000/linkedin.png"
+                alt="LinkedIn"
+              />
+            </a>
+            <a href="https://github.com/bwaobikeze">
+              <img
+                src="https://img.icons8.com/color/48/000000/github--v1.png"
+                alt="GitHub"
+              />
+            </a>
+          </CardFooter>
         </Card>
       </div>
 
@@ -84,7 +92,9 @@ function BlogHomePage() {
               </div>
             </CardBody>
             <CardFooter>
-              <Button onClick={()=>handleReadMore(post.postID)}>Read More</Button>
+              <Button onClick={() => handleReadMore(post.postID)}>
+                Read More
+              </Button>
             </CardFooter>
           </Card>
         ))}
@@ -111,9 +121,20 @@ const styles = {
     alignItems: "center",
     gap: "10px",
   },
+  ProfileCardHeader: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center", // Center horizontally
+    textAlign: "center", // Center text horizontally
+    padding: "1rem",
+  },
   blogPosts: {
     flex: "2",
     width: "100%",
+  },
+  CardFooter: {
+    display: "flex",
+    justifyContent: "center",
   },
   postContainer: {
     display: "flex",
@@ -137,6 +158,11 @@ const styles = {
     postContainer: {
       flexDirection: "column", // Stack the image and text vertically on smaller screens
     },
+  },
+  avatar: {
+    width: "100px",
+    height: "100px",
+    borderRadius: "80%",
   },
 };
 
