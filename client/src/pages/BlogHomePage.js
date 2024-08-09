@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
@@ -6,14 +7,16 @@ import {
   CardBody,
   Image,
   CardFooter,
+  CircularProgress,
 } from "@nextui-org/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './BlogHomePage.css'; // Import the CSS file
 
 function BlogHomePage() {
   const [posts, setPosts] = useState([]);
-  const navigate = useNavigate(); // Use the navigate function to navigate to a different page
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -23,6 +26,7 @@ function BlogHomePage() {
           return post;
         });
         setPosts([...posts, ...newPost]);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -30,17 +34,17 @@ function BlogHomePage() {
   }, []);
 
   const handleReadMore = (id) => {
-    navigate(`/post/${id}`); // Navigate to the post page with the post id
+    navigate(`/post/${id}`);
   };
 
   return (
-    <div style={styles.container}>
+    <div className="container">
       {/* Sidebar */}
-      <div style={styles.sidebar}>
+      <div className="sidebar">
         <Card>
-          <CardHeader style={styles.ProfileCardHeader}>
+          <CardHeader className="ProfileCardHeader">
             <Avatar
-              style={styles.avatar}
+              className="avatar"
               src="https://i.postimg.cc/Hxvkqz4J/image.webp"
               alt="Avatar"
             />
@@ -51,13 +55,13 @@ function BlogHomePage() {
           <CardBody>
             <h4>Welcome to My Blog!</h4>
             <p>
-              I'm a software engineer with a passion for Video games Movies and
+              I'm a software engineer with a passion for Video games, Movies, and
               everything pop culture. I write about my experiences and share my
               thoughts on various topics. Feel free to read my blog posts and
               leave a comment.
             </p>
           </CardBody>
-          <CardFooter style={styles.CardFooter}>
+          <CardFooter className="CardFooter">
             <a href="https://www.linkedin.com/in/brianwaobikeze">
               <img
                 src="https://img.icons8.com/color/50/000000/linkedin.png"
@@ -75,98 +79,42 @@ function BlogHomePage() {
       </div>
 
       {/* Blog Posts */}
-      <div style={styles.blogPosts}>
-        {posts.map((post) => (
-          <Card key={post.id} style={{ marginBottom: "20px" }}>
-            <CardBody>
-              <div style={styles.postContainer}>
-                <div style={styles.imageContainer}>
-                  <Image
-                    src={post.postImage || "https://via.placeholder.com/400"}
-                    alt="Blog"
-                    width="100%"
-                  />
+      {loading ? (
+        <CircularProgress
+          size="lg"
+          label="Loading..."
+          className="blogPosts"
+        ></CircularProgress>
+      ) : (
+        <div className="blogPosts">
+          {posts.map((post) => (
+            <Card key={post.id} style={{ marginBottom: "20px" }}>
+              <CardBody>
+                <div className="postContainer">
+                  <div className="imageContainer">
+                    <Image
+                      src={post.postImage || "https://via.placeholder.com/400"}
+                      alt="Blog"
+                      width="100%"
+                    />
+                  </div>
+                  <div className="postContent">
+                    <h1 className="postTitle">{post.title}</h1>
+                    <p>{post.Body.slice(0, 350)}...</p>
+                  </div>
                 </div>
-
-                <div style={styles.postContent}>
-                  <h1 style={styles.postTitle}>{post.title}</h1>
-                  <p>{post.Body.slice(0, 350)}...</p>
-                </div>
-              </div>
-            </CardBody>
-            <CardFooter>
-              <Button onClick={() => handleReadMore(post.postID)}>
-                Read More
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
+              </CardBody>
+              <CardFooter>
+                <Button onClick={() => handleReadMore(post.postID)}>
+                  Read More
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    gap: "20px",
-    padding: "20px",
-    flexWrap: "wrap",
-  },
-  sidebar: {
-    flex: "0 0 300px",
-    width: "100%",
-    marginBottom: "20px",
-  },
-  cardHeader: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-  },
-  ProfileCardHeader: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center", // Center horizontally
-    textAlign: "center", // Center text horizontally
-    padding: "1rem",
-  },
-  blogPosts: {
-    flex: "2",
-    width: "100%",
-  },
-  CardFooter: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  postContainer: {
-    display: "flex",
-    gap: "20px",
-    padding: "20px",
-    flexDirection: "row", // Keep the image on the left and text on the right
-    alignItems: "center", // Vertically align the image and text
-  },
-  imageContainer: {
-    flex: "0 0 150px", // Control the size of the image container
-  },
-  postContent: {
-    flex: "1",
-  },
-  postTitle: {
-    fontSize: "24px", // Make the title large
-    fontWeight: "bold", // Make the title bold
-    marginBottom: "10px",
-  },
-  "@media (max-width: 768px)": {
-    postContainer: {
-      flexDirection: "column", // Stack the image and text vertically on smaller screens
-    },
-  },
-  avatar: {
-    width: "100px",
-    height: "100px",
-    borderRadius: "80%",
-  },
-};
 
 export default BlogHomePage;

@@ -3,6 +3,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import axios from "axios";
 import ViewPost from "./ViewPost";
+import BlogHomePage from "./BlogHomePage";
+import '@testing-library/jest-dom'
 
 // Mock the axios module
 jest.mock("axios");
@@ -35,23 +37,51 @@ describe("ViewPost Component", () => {
     // Verify if the post body is rendered
     expect(screen.getByText("This is a test post body.")).toBeInTheDocument();
   });
+    
+    
+    // test("if no data is pulled from database", async () => {
+    //     // Mock the API response
+    //     mockedAxios.get.mockResolvedValue({
+    //         data: {},
+    //     });
 
-  test("navigates to home on back button click", () => {
-    const navigate = jest.fn();
+    //     render(
+    //         <Router>
+    //             <ViewPost />
+    //         </Router>
+    //     );
 
-    // Mock useNavigate
-    jest
-      .spyOn(require("react-router-dom"), "useNavigate")
-      .mockImplementation(() => navigate);
+    //     // Verify if the title is rendered
+    //     expect(await screen.findByText("loading")).toBeInTheDocument();
+    // });
 
-    render(
-      <Router>
-        <ViewPost />
-      </Router>
-    );
+    test("if back button is clicked", async () => {
+        // Mock the API response
+        mockedAxios.get.mockResolvedValue({
+            data: {
+                title: "Test Post Title",
+                postImage: "http://example.com/image.jpg",
+                Body: "This is a test post body.",
+            },
+        });
 
-    // Simulate back button click
-    fireEvent.click(screen.getByText("← All Posts"));
-    expect(navigate).toHaveBeenCalledWith("/");
-  });
+        render(
+            <Router>
+                <BlogHomePage/>
+                <ViewPost />
+            </Router>
+        );
+
+        // Verify if the title is rendered
+        expect(await screen.findByText("Test Post Title")).toBeInTheDocument();
+
+        // Click the back button
+        fireEvent.click(screen.getByText("← All Posts"));
+
+        // Verify if the user is navigated to the home page
+        expect(screen.getByText("Brian Waobikeze")).toBeInTheDocument();
+    });
+    
+
+  
 });

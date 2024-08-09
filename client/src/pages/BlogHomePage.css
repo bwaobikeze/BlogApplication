@@ -1,0 +1,73 @@
+/* BlogHomePage.css */
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .sidebar {
+    flex: 0 0 370px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .cardHeader,
+  .ProfileCardHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .blogPosts {
+    flex: 2;
+    width: 100%;
+  }
+  
+  .CardFooter {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .postContainer {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-direction: row; /* Keep the image on the left and text on the right */
+    align-items: center; /* Vertically align the image and text */
+  }
+  
+  .imageContainer {
+    flex: 0 0 150px; /* Control the size of the image container */
+  }
+  
+  .postContent {
+    flex: 1;
+  }
+  
+  .postTitle {
+    font-size: 24px; /* Make the title large */
+    font-weight: bold; /* Make the title bold */
+    margin-bottom: 10px;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 80%;
+  }
+  
+  /* Media Query */
+  @media (max-width: 768px) {
+    .postContainer {
+      flex-direction: column;
+    }
+  }
+  
+  
