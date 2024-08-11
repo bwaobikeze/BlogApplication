@@ -73,4 +73,20 @@
     align-items: center;
     height: 100vh;
   }
+
+  .likeAndDateAlinment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+  }
+
+  @media (max-width: 768px) {
+    .cardHeader{
+        flex-direction: column;
+    }
+    
+  }
+  
   

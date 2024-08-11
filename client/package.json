@@ -50,12 +50,11 @@
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
       "^axios$": "axios/dist/node/axios.cjs",
-       "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+      "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
     },
     "transform": {
       "^.+\\.js$": "babel-jest",
       ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
     }
-
   }
 }

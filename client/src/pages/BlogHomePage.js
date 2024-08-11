@@ -11,7 +11,7 @@ import {
 } from "@nextui-org/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import './BlogHomePage.css'; // Import the CSS file
+import "./BlogHomePage.css"; // Import the CSS file
 
 function BlogHomePage() {
   const [posts, setPosts] = useState([]);
@@ -44,9 +44,9 @@ function BlogHomePage() {
         <Card>
           <CardHeader className="ProfileCardHeader">
             <Avatar
-              className="avatar"
               src="https://i.postimg.cc/Hxvkqz4J/image.webp"
               alt="Avatar"
+              style={{ width: "100px", height: "100px" }}
             />
             <div>
               <h5>Brian Waobikeze</h5>
@@ -55,9 +55,9 @@ function BlogHomePage() {
           <CardBody>
             <h4>Welcome to My Blog!</h4>
             <p>
-              I'm a software engineer with a passion for Video games, Movies, and
-              everything pop culture. I write about my experiences and share my
-              thoughts on various topics. Feel free to read my blog posts and
+              I'm a software engineer with a passion for Video games, Movies,
+              and everything pop culture. I write about my experiences and share
+              my thoughts on various topics. Feel free to read my blog posts and
               leave a comment.
             </p>
           </CardBody>

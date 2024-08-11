@@ -14,7 +14,7 @@
     margin-bottom: 20px;
   }
   
-  .cardHeader,
+
   .ProfileCardHeader {
     display: flex;
     align-items: center;
@@ -60,7 +60,6 @@
   .avatar {
     width: 100px;
     height: 100px;
-    border-radius: 80%;
   }
   
   /* Media Query */
