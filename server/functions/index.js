@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 
 (async () => {
-  const { default: db } = await import("../db/firebase.js");
+  const { default: db } = await import("./db/firebase.js");
 
   app.get("/", async (req, res) => {
     try {

@@ -20,7 +20,7 @@ function BlogHomePage() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:5001/blogapplication-431707/us-central1/app")
+      .get("https://us-central1-blogapplication-431707.cloudfunctions.net/app")
       .then((response) => {
         const newPost = response.data.map((post) => {
           return post;
