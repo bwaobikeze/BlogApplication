@@ -24,7 +24,7 @@ function ViewPost() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/post/${id}`)
+      .get(`http://127.0.0.1:5001/blogapplication-431707/us-central1/app/post/${id}`)
       .then((response) => {
         setPost(response.data);
         setLike(response.data.totalLikes);
@@ -43,7 +43,7 @@ function ViewPost() {
 
   const handleLike = () => {
     axios
-      .post(`http://localhost:8080/post/${id}`)
+      .post(`http://127.0.0.1:5001/blogapplication-431707/us-central1/app/post/${id}`)
       .then((response) => {
         setLike(response.data.totalLikes);
         setLiked(true);

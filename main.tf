@@ -40,3 +40,15 @@ resource "google_firestore_database" "firestore" {
   type        = "FIRESTORE_NATIVE"
 }
 
+resource "google_cloudfunctions_function" "function" {
+  provider = google-beta
+  project  = "blogapplication-431707"
+  name     = "blogapp"
+  runtime  = "nodejs16"
+  entry_point = "BlogBackend"
+  trigger_http = true
+  region = "us-central1"
+  source_archive_bucket = "blogapplication-431707.appspot.com"
+  source_archive_object = "BlogBackend.zip"
+}
+
