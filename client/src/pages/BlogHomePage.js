@@ -67,12 +67,21 @@ function BlogHomePage() {
                 src="https://img.icons8.com/color/50/000000/linkedin.png"
                 alt="LinkedIn"
               />
+              linkedin
             </a>
             <a href="https://github.com/bwaobikeze">
               <img
                 src="https://img.icons8.com/color/48/000000/github--v1.png"
                 alt="GitHub"
               />
+              GitHub
+            </a>
+            <a href="https://brian-portfoliowebsite.web.app/">
+              <img
+                src="https://img.icons8.com/color/48/000000/domain--v1.png"
+                alt="Portfolio Website"
+              />
+              Website
             </a>
           </CardFooter>
         </Card>

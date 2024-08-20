@@ -16,7 +16,7 @@ provider "google-beta" {
 
 variable "credentials_file" {
   type    = string
-  default = "C:/Users/bwaob/Desktop/GoogleAccountKey/blogapplication-431707-4077aa507afe.json"
+  default = GOOGLE_CREDENTIALS_FILE
 }
 resource "google_firebase_project" "project" {
   provider = google-beta
